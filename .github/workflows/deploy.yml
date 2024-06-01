@@ -1,0 +1,38 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - lef
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PAT }}
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USER }}/my-spring-boot-app:latest .
+          docker push ${{ secrets.DOCKER_USER }}/my-spring-boot-app:latest
+
+      - uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: 188.225.58.99
+          username: root
+          password: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            docker pull ${{ secrets.DOCKER_USER }}/my-spring-boot-app:latest
+            docker stop my-spring-boot-app || true
+            docker rm my-spring-boot-app || true
+            docker run -d --name my-spring-boot-app -p 80:8081 ${{ secrets.DOCKER_USER }}/my-spring-boot-app:latest
