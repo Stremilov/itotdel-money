@@ -32,7 +32,10 @@ jobs:
           password: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            docker pull ${{ secrets.DOCKER_USER }}/my-spring-boot-app:latest
-            docker stop my-spring-boot-app || true
-            docker rm my-spring-boot-app || true
-            docker run -d --name my-spring-boot-app -p 80:8081 ${{ secrets.DOCKER_USER }}/my-spring-boot-app:latest
+#            docker pull ${{ secrets.DOCKER_USER }}/my-spring-boot-app:latest
+#            docker stop my-spring-boot-app || true
+#            docker rm my-spring-boot-app || true
+#            docker run -d --name my-spring-boot-app -p 80:8081 ${{ secrets.DOCKER_USER }}/my-spring-boot-app:latest
+            ./mvnw compile
+            ./mvnw install
+            ./mvnw spring-boot:run
