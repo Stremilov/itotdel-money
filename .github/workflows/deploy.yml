@@ -17,8 +17,6 @@ jobs:
         run: pwd
       - name: List files
         run: ls -al
-      - name: Navigate to project directory
-        run: cd itotdel-money
       - uses: appleboy/ssh-action@v0.1.10
         with:
           host: 188.225.58.99
@@ -26,6 +24,5 @@ jobs:
           password: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            ./mvnw compile
             ./mvnw install
             ./mvnw spring-boot:run
