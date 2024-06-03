@@ -24,5 +24,7 @@ jobs:
           password: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            ./mvnw install
-            ./mvnw spring-boot:run
+#            ./mvnw install
+#            ./mvnw spring-boot:run
+              mvn install
+              mvn spring-boot:run
