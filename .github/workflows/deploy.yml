@@ -13,6 +13,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Print working directory
+        run: pwd
+      - name: List files
+        run: ls -al
+      - name: Navigate to project directory
+        run: cd itotdel-money
       - uses: appleboy/ssh-action@v0.1.10
         with:
           host: 188.225.58.99
