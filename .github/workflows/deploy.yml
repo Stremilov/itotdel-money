@@ -13,10 +13,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Print working directory
-        run: pwd
-      - name: List files
-        run: ls -al
       - uses: appleboy/ssh-action@v0.1.10
         with:
           host: 188.225.58.99
@@ -24,6 +20,5 @@ jobs:
           password: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            chmod +x mvnw
-            ./mvnw install
-            ./mvnw spring-boot:run
+            pwd
+            ls -al
