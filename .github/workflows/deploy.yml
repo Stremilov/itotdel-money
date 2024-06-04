@@ -20,6 +20,7 @@ jobs:
           password: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
+            pwd
             rm --recursive itotdel-money
             git clone https://github.com/Stremilov/itotdel-money.git
             cd itotdel-money
