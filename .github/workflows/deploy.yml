@@ -20,5 +20,10 @@ jobs:
           password: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
+            rm --recursive itotdel-money
+            git clone https://github.com/Stremilov/itotdel-money.git
+            cd itotdel-money
             pwd
             ls -al
+            ./mvnw install
+            ./mvnw spring-boot:run
