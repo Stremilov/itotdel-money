@@ -19,7 +19,7 @@ public class TransactionService {
     private TransactionRepository repository;
 
 
-    public void addTransaction(AddTransactionRequest requestBody) {
+    public Transaction addTransaction(AddTransactionRequest requestBody) {
         Transaction transaction = Transaction.builder()
                 .userId(requestBody.getUserId())
                 .sum(requestBody.getSum())
@@ -27,7 +27,7 @@ public class TransactionService {
                 .date(requestBody.getDate())
                 .build();
 
-        repository.save(transaction);
+        return repository.save(transaction);
     }
 
     public Optional<List<TransactionView>> getTransactions(String userId, Date date, Date startDate, Date endDate) {

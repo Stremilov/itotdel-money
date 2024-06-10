@@ -4,6 +4,7 @@ package com.itotdel.money.controller;
 import com.itotdel.money.exception.NoDateProvidedException;
 import com.itotdel.money.model.AddTransactionRequest;
 import com.itotdel.money.model.MessageResponse;
+import com.itotdel.money.model.Transaction;
 import com.itotdel.money.model.TransactionView;
 import com.itotdel.money.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,11 @@ public class TransactionController {
     }
 
     @PostMapping()
-    void addTransaction(@RequestBody AddTransactionRequest body) {
-        transactionService.addTransaction(body);
-        ResponseEntity.ok().build();
+    ResponseEntity<Transaction> addTransaction(@RequestBody AddTransactionRequest body) {
+        return ResponseEntity.ok(transactionService.addTransaction(body));
+
+//        transactionService.addTransaction(body);
+//        ResponseEntity.ok().build();
     }
 
     @GetMapping
