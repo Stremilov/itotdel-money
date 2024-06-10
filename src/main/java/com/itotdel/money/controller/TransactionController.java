@@ -28,7 +28,7 @@ public class TransactionController {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping
+    @PostMapping()
     void addTransaction(@RequestBody AddTransactionRequest body) {
         transactionService.addTransaction(body);
         ResponseEntity.ok().build();
